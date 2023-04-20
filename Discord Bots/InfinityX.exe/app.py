@@ -23,10 +23,10 @@ async def on_member_join(member):
             
 @commands.command()
 async def ip(ctx):
-    await ctx.send("The IP can be found upon creating an application. Please go to the **create application** channel, type **;apply** and wait for the bot to DM you! Then, just answer his questions, and wait for a staff member to accept! Thats It! Then, go to the **server-info** channel, and there will be the IP of both java & bedrock!")
+    await ctx.send("The IP can be found upon creating an application. Please Go to https://discord.com/channels/941222379496013844/1074212997750345828 and click the **blue button**. Then, fill the form, and, thats it! The IP then should be in https://discord.com/channels/941222379496013844/941225197514661928")
 @commands.command()
 async def version(ctx):
-    await ctx.send("Java & Bedrock **1.19.2 (or.3)**")
+    await ctx.send("Java & Bedrock **1.19.4)**")
 @commands.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
@@ -189,7 +189,7 @@ async def joined(ctx, member: discord.Member):
     
 @commands.command()
 async def procedure(ctx, member: discord.Member):
-    await ctx.send(f'{member.mention}, The Procedure to join the server is simple! just, go to #📄-create-application-📄 . Then, type **;apply** in the channel. After that, check you DM\'s for a bot named \"Discortics\". Just, answer all of his questions, and you application will be submitted! Then, wait for a Staff Member to accept your application, and then, you are done! The IP will be in #ℹ-server-info-ℹ ')
+    await ctx.send(f'{member.mention}, The Procedure to join the server is simple! Go to https://discord.com/channels/941222379496013844/1074212997750345828IP and click on the blue button. Then, just fill the form, and that it! The IP wil be in will be in https://discord.com/channels/941222379496013844/941225197514661928ℹ ')
 
 
 
