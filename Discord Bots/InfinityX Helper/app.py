@@ -102,4 +102,4 @@ async def on_message(message):
     if message.content.startswith('Arsehole'):
         await message.reply('Aye! Keep it PG!')
         await msg.delete()
-client.run('MTA2NTUwODMxMDYwMzgwODc3OQ.GSihh8.FJoBAO01DJ_WueUHszeeUGerx5QiXDUvKYVEBQ')
+client.run('bot token goes here xD')

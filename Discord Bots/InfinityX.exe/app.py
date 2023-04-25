@@ -244,4 +244,4 @@ bot.add_command(kick)
 
 
 #client = MyClient(intents=intents)
-bot.run('MTAzMDUxNDE3NTg4MzEwNDI5Ng.GeqhjR.wQzrot_NeRxe-o_WiBUSKpi4IIy42SCxg353W8')
+bot.run('bottoken goes here xD')
