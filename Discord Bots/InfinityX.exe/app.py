@@ -26,7 +26,7 @@ async def ip(ctx):
     await ctx.send("The IP can be found upon creating an application. Please Go to https://discord.com/channels/941222379496013844/1074212997750345828 and click the **blue button**. Then, fill the form, and, thats it! The IP then should be in https://discord.com/channels/941222379496013844/941225197514661928")
 @commands.command()
 async def version(ctx):
-    await ctx.send("Java & Bedrock **1.19.4)**")
+    await ctx.send("Java **1.20.1**")
 @commands.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
@@ -244,4 +244,4 @@ bot.add_command(kick)
 
 
 #client = MyClient(intents=intents)
-bot.run('bottoken goes here xD')
+bot.run('MTAzMDUxNDE3NTg4MzEwNDI5Ng.GUxR0I.SV3rJk7jkQN8YdZGGapOEb1hONSs4YB-6_8zis')
