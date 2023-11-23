@@ -2,6 +2,7 @@ import discord
 import random
 import asyncio
 import typing
+import aiohttp
 
 from discord.ext import tasks
 from discord.ext import commands
@@ -26,7 +27,23 @@ async def ip(ctx):
     await ctx.send("The IP can be found upon creating an application. Please Go to https://discord.com/channels/941222379496013844/1074212997750345828 and click the **blue button**. Then, fill the form, and, thats it! The IP then should be in https://discord.com/channels/941222379496013844/941225197514661928")
 @commands.command()
 async def version(ctx):
-    await ctx.send("Java **1.20.1**")
+    api_url = "https://api.mcsrvstat.us/3/play.craftingrealm.tk"
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(api_url) as response:
+            if response.status == 200:
+                data = await response.json()
+                print(data)  # Add this line for debugging
+                if "protocol" in data and "name" in data["protocol"]:
+                    version_name = data["protocol"]["name"]
+                    await ctx.send(f"Server version: {version_name}")
+                else:
+                    await ctx.send("Unable to fetch server version name from the API.")
+            else:
+                await ctx.send(f"Unable to fetch server version. API returned {response.status}")
+
+
+
 @commands.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
@@ -244,4 +261,4 @@ bot.add_command(kick)
 
 
 #client = MyClient(intents=intents)
-bot.run('MTAzMDUxNDE3NTg4MzEwNDI5Ng.GUxR0I.SV3rJk7jkQN8YdZGGapOEb1hONSs4YB-6_8zis')
+bot.run('bot-token-goes-here-lol')

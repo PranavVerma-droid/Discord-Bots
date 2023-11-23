@@ -139,7 +139,7 @@ async def on_ready():
 async def main():
     async with bot:
         await bot.add_cog(Music(bot))
-        await bot.start('MTA2NTMzNzk0MzIwNTYyMTgwMQ.Gtq5gT.Dk5ghZe9QBkf4BYsphw7bnQPDvH_5W3cLtZegc')
+        await bot.start('bot token goes here')
 
 
 asyncio.run(main())
