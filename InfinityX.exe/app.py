@@ -19,15 +19,15 @@ async def on_ready():
     
 @bot.event
 async def on_member_join(member):
-    channel = bot.get_channel(1019245565697065053)
+    channel = bot.get_channel(1213079658321420330)
     await channel.send(f'Welcome {member.mention} to the server!')
             
 @commands.command()
 async def ip(ctx):
-    await ctx.send("The IP can be found upon creating an application. Please Go to https://discord.com/channels/941222379496013844/1074212997750345828 and click the **blue button**. Then, fill the form, and, thats it! The IP then should be in https://discord.com/channels/941222379496013844/941225197514661928")
+    await ctx.send("The IP can be found in https://discord.com/channels/1213079657327624232/1213081129976995870. Please go to https://discord.com/channels/1213079657327624232/1213767566380765214 to get whitelisted before joining.")
 @commands.command()
 async def version(ctx):
-    api_url = "https://api.mcsrvstat.us/3/play.craftingrealm.tk"
+    api_url = "https://api.mcsrvstat.us/3/play.pranavv.site"
 
     async with aiohttp.ClientSession() as session:
         async with session.get(api_url) as response:
@@ -36,21 +36,75 @@ async def version(ctx):
                 print(data)  # Add this line for debugging
                 if "protocol" in data and "name" in data["protocol"]:
                     version_name = data["protocol"]["name"]
-                    await ctx.send(f"Server version: {version_name}")
+                    await ctx.send(f"Server version: **{version_name}**")
                 else:
                     await ctx.send("Unable to fetch server version name from the API.")
             else:
                 await ctx.send(f"Unable to fetch server version. API returned {response.status}")
 
+@commands.command()
+async def info(ctx):
+    """Minecraft Server Info"""
+    api_url = "https://api.mcsrvstat.us/3/play.pranavv.site"
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(api_url) as response:
+            if response.status == 200:
+                data = await response.json()
+                print(data)  # Add this line for debugging
+                embed = discord.Embed(title="Minecraft Server Information")
+                
+                # Extract and add server domain
+                if "hostname" in data:
+                    embed.add_field(name="Domain", value=data["hostname"], inline=False)
+                
+                # Extract and add server version
+                if "version" in data:
+                    embed.add_field(name="Version", value=data["version"], inline=False)
+                
+                # Extract and add server icon
+                if "icon" in data:
+                    icon_url = data["icon"]
+                    if len(icon_url) <= 2048:
+                        embed.set_thumbnail(url=icon_url)
+                    else:
+                        print("Icon URL too long, skipping setting thumbnail.")
+                
+                # Extract and add server MOTD
+                if "motd" in data and "clean" in data["motd"]:
+                    motd = "\n".join(data["motd"]["clean"])
+                    embed.add_field(name="MOTD", value=motd, inline=False)
+                
+                await ctx.send(embed=embed)
+                await ctx.send("Whitelist is on! Please apply in https://discord.com/channels/1213079657327624232/1213767566380765214 before joining!")
+            else:
+                await ctx.send(f"Unable to fetch server information. API returned {response.status}")
 
 
 @commands.command()
 async def kick(ctx, member : discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await ctx.send(f'Kicked {member.mention}')    
+    
 @commands.command()
 async def ping(ctx):
-    await ctx.send("Pong!")
+    """Check if the Server is Online."""
+    api_url = "https://api.mcsrvstat.us/3/play.pranavv.site"
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(api_url) as response:
+            if response.status == 200:
+                data = await response.json()
+                print(data)  # Add this line for debugging
+                if "online" in data:
+                    if data["online"]:
+                        await ctx.send("Server is **Online**!")
+                    else:
+                        await ctx.send("Server is **Offline**.")
+                else:
+                    await ctx.send("Unable to determine server status from the API.")
+            else:
+                await ctx.send(f"Unable to fetch server information. API returned {response.status}")
     
     
 @commands.command()
@@ -258,7 +312,8 @@ bot.add_command(version)
 bot.add_command(guess)
 bot.add_command(procedure)
 bot.add_command(kick)
+bot.add_command(info)
 
 
 #client = MyClient(intents=intents)
-bot.run('bot-token-goes-here-lol')
+bot.run('bottoken here lol')
